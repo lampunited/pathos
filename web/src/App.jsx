@@ -77,7 +77,7 @@ const App = () => {
       const response = await fetch('http://127.0.0.1:5000/api/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: searchInput })
+        body: JSON.stringify({ query: searchInput }),
       });
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
@@ -122,12 +122,24 @@ const App = () => {
             {error && (
               <p className="mt-4 text-center text-red-500">Error: {error}</p>
             )}
-            {results && (
+            {results && Array.isArray(results) && (
               <div className="mt-6">
                 <h2 className="mb-2 text-lg font-semibold text-gray-700">Results:</h2>
-                <pre className="whitespace-pre-wrap rounded-md bg-gray-100 p-4 text-sm text-gray-800">
-                  {JSON.stringify(results, null, 2)}
-                </pre>
+                <div>
+                  {results.map((result, index) => (
+                    <div key={index} className="mb-4 rounded-md bg-gray-100 p-4 text-sm text-gray-800">
+                      <p><strong>Question:</strong> {result.question_text}</p>
+                      <p><strong>Answer:</strong> {result.answer_text}</p>
+                      <p><strong>Distance:</strong> {result.distance}</p>
+                      <p>
+                        <strong>URL:</strong>{' '}
+                        <a href={result.url} target="_blank" rel="noopener noreferrer">
+                          {result.url}
+                        </a>
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
             <Footer />
