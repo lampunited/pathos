@@ -25,12 +25,12 @@ def search_faiss(query, top_k=3):
     return results
 
 # Example Query
-query = "How do I speed up dictionary lookups in Python?"
-results = search_faiss(query, top_k=3)
+query = "Can you help me login to github"
+results = search_faiss(query, top_k=10)
 
 # Print results
 for res in results:
-    print(f"Question: {res['question_text']}")
+    #print(f"Question: {res['question_text']}")
     print(f"Answer: {res['answer_text']}")
     print(f"Distance: {res['distance']:.4f}")
-    print(f"URL: {res['url']}\n")
+    #print(f"URL: {res['url']}\n")

@@ -12,7 +12,7 @@ reddit = praw.Reddit(
 print(f"Authenticated as: {reddit.user.me()}")
 
 
-query = "uiuc cs"
+query = "can't login to github"
 search_results = reddit.subreddit("all").search(query, sort="relevance", limit=10)
 
 results_list = []
@@ -33,27 +33,23 @@ for submission in search_results:
     sort_key = lambda c: (c.score, len(c.body))
     depth0_sorted = sorted(depth0_comments, key=sort_key, reverse=True)[:5]
     depth1_sorted = sorted(depth1_comments, key=sort_key, reverse=True)[:5]
-    other_sorted  = sorted(other_comments, key=sort_key, reverse=True)
+    other_sorted  = sorted(other_comments, key=sort_key, reverse=True)[:5]
     
     combined_comments = depth0_sorted + depth1_sorted + other_sorted
-    
-    # Select the top comment if available as the answer_text
-    if combined_comments:
-        answer_text = combined_comments[0].body
-    else:
-        answer_text = ""
     
     post_score = submission.score
     
     # Append a single result object per submission
-    result_obj = {
-        "source": "reddit",
-        "question_text": question_text,
-        "answer_text": answer_text,
-        "score": post_score,
-        "url": post_url
-    }
-    results_list.append(result_obj)
+    for comment in combined_comments:
+        answer_text = comment.body
+        result_obj = {
+            "source": "reddit",
+            "question_text": question_text,
+            "answer_text": answer_text,
+            "score": post_score,
+            "url": post_url
+        }
+        results_list.append(result_obj)
 
 with open("reddit_results.json", "w", encoding="utf-8") as f:
     json.dump(results_list, f, ensure_ascii=False, indent=4)
