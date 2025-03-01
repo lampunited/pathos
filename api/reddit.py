@@ -31,9 +31,9 @@ for submission in search_results:
     other_comments  = [c for c in all_comments if c.depth > 1]
     
     sort_key = lambda c: (c.score, len(c.body))
-    depth0_sorted = sorted(depth0_comments, key=sort_key, reverse=True)[:5]
-    depth1_sorted = sorted(depth1_comments, key=sort_key, reverse=True)[:5]
-    other_sorted  = sorted(other_comments, key=sort_key, reverse=True)[:5]
+    depth0_sorted = sorted(depth0_comments, key=sort_key, reverse=True)[:3]
+    depth1_sorted = sorted(depth1_comments, key=sort_key, reverse=True)[:3]
+    other_sorted  = sorted(other_comments, key=sort_key, reverse=True)[:3]
     
     combined_comments = depth0_sorted + depth1_sorted + other_sorted
     
@@ -51,7 +51,7 @@ for submission in search_results:
         }
         results_list.append(result_obj)
 
-with open("reddit_results.json", "w", encoding="utf-8") as f:
+with open("api/reddit_results.json", "w", encoding="utf-8") as f:
     json.dump(results_list, f, ensure_ascii=False, indent=4)
 
 print("Results written to reddit_results.json")

@@ -1,5 +1,5 @@
 from google import genai
-from redditfunction import get_reddit
+from redditfunction import search_reddit
 
 client = genai.Client(api_key="AIzaSyCgOJpua5_yNc8JBuFI9f17Ysq03cUgkCU")
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     user_question = input("Enter your debugging or programming question: ")
     query = ask_llm(user_question)
     print(query)
-    answers = get_reddit(query)
+    answers = search_reddit(query)
     doc = ""
     for answer in answers:
         doc += answer.body[:200] + "\n"

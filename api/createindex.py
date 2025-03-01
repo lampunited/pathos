@@ -29,13 +29,14 @@ def create_index(data):
     index.add(embeddings)
 
     # Save FAISS index for later use
-    faiss.write_index(index, "index/faiss_index.bin")
-    np.save("index/id_map.npy", id_map)  # Save ID map for retrieval
+    faiss.write_index(index, "api/index/faiss_index.bin")
+    np.save("api/index/id_map.npy", id_map)  # Save ID map for retrieval
 
     print("FAISS index created and saved!")
 
-# Load JSON file
-with open("reddit_results.json", "r", encoding="utf-8") as f:
-    data = json.load(f)  # This loads the JSON array into the variable `data`
+if __name__ == "__main__":
+    # Load JSON file
+    with open("api/reddit_results.json", "r", encoding="utf-8") as f:
+        data = json.load(f)  # This loads the JSON array into the variable `data`
 
-create_index(data)
+    create_index(data)
