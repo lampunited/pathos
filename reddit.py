@@ -1,4 +1,5 @@
 import praw
+import json
 #authentication
 reddit = praw.Reddit(
     client_id="8sZIJdk__UZwu_fJmx9Rew",
@@ -11,54 +12,50 @@ reddit = praw.Reddit(
 print(f"Authenticated as: {reddit.user.me()}")
 
 
-query = "how do substrings work in c++"
+query = "uiuc cs"
+search_results = reddit.subreddit("all").search(query, sort="relevance", limit=10)
 
-results = reddit.subreddit("all").search(query, sort="relevance", limit=1)
+results_list = []
 
-for submission in results:
+for submission in search_results:
     post_url = "https://www.reddit.com" + submission.permalink
+    question_text = submission.title
+    if submission.selftext:
+        question_text += "\n\n" + submission.selftext
 
-    print("----- Post -----")
-    print("Title:", submission.title)
-    print("Selftext:", submission.selftext)
-    print("URL:", post_url)
-    print("Score:", submission.score)
-    print("Upvote Ratio:", submission.upvote_ratio)
-    print("\n--- Comments ---")
-    
     submission.comments.replace_more(limit=0)
     all_comments = submission.comments.list()
-
-    # Separate comments by depth
+    
     depth0_comments = [c for c in all_comments if c.depth == 0]
     depth1_comments = [c for c in all_comments if c.depth == 1]
     other_comments  = [c for c in all_comments if c.depth > 1]
+    
+    sort_key = lambda c: (c.score, len(c.body))
+    depth0_sorted = sorted(depth0_comments, key=sort_key, reverse=True)[:5]
+    depth1_sorted = sorted(depth1_comments, key=sort_key, reverse=True)[:5]
+    other_sorted  = sorted(other_comments, key=sort_key, reverse=True)
+    
+    combined_comments = depth0_sorted + depth1_sorted + other_sorted
+    
+    # Select the top comment if available as the answer_text
+    if combined_comments:
+        answer_text = combined_comments[0].body
+    else:
+        answer_text = ""
+    
+    post_score = submission.score
+    
+    # Append a single result object per submission
+    result_obj = {
+        "source": "reddit",
+        "question_text": question_text,
+        "answer_text": answer_text,
+        "score": post_score,
+        "url": post_url
+    }
+    results_list.append(result_obj)
 
-    # Sorting: We sort by score first and then by comment text length (as a proxy for more content)
-    sort_key = lambda comment: (comment.score, len(comment.body))
-    depth0_sorted = sorted(depth0_comments, key=sort_key, reverse=True)
-    depth1_sorted = sorted(depth1_comments, key=sort_key, reverse=True)
-    other_sorted  = sorted(other_comments,  key=sort_key, reverse=True)
+with open("reddit_results.json", "w", encoding="utf-8") as f:
+    json.dump(results_list, f, ensure_ascii=False, indent=4)
 
-    # Priority 1: Top 5 depth 0 comments
-    print("Top 5 Depth 0 Comments:")
-    for comment in depth0_sorted[:5]:
-        print("Depth:", comment.depth, "| Score:", comment.score, "| Length:", len(comment.body))
-        print("Comment:", comment.body)
-        print("-" * 40)
-
-    # Priority 2: Top 5 depth 1 comments
-    print("Top 5 Depth 1 Comments:")
-    for comment in depth1_sorted[:5]:
-        print("Depth:", comment.depth, "| Score:", comment.score, "| Length:", len(comment.body))
-        print("Comment:", comment.body)
-        print("-" * 40)
-
-    # Priority 3: Other high-quality comments (sorted by score and length)
-    print("Other High-Quality Comments:")
-    for comment in other_sorted[:5]:
-        print("Depth:", comment.depth, "| Score:", comment.score, "| Length:", len(comment.body))
-        print("Comment:", comment.body)
-        print("-" * 40)
-
-    print("=" * 60)
+print("Results written to reddit_results.json")
