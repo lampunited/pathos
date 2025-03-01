@@ -2,6 +2,7 @@ import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
 import json
+from tqdm import tqdm
 
 # Load SentenceTransformer model
 model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -12,7 +13,7 @@ def create_index(data):
     embeddings = []
     id_map = {}
 
-    for idx, item in enumerate(data):
+    for idx, item in tqdm(enumerate(data), desc="Creating FAISS index: ", total=len(data)):
         text_to_embed = f"{item['answer_text']}"
         embedding = model.encode(text_to_embed)
         

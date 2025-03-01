@@ -1,5 +1,6 @@
 import praw
 import json
+from tqdm import tqdm
 
 def search_reddit(query):
     #authentication
@@ -13,11 +14,12 @@ def search_reddit(query):
 
     print(f"Authenticated as: {reddit.user.me()}")
 
-    search_results = reddit.subreddit("all").search(query, sort="relevance", limit=10)
+    search_amount = 10
+    search_results = reddit.subreddit("all").search(query, sort="relevance", limit=search_amount)
 
     results_list = []
 
-    for submission in search_results:
+    for submission in tqdm(search_results, desc="Processing reddit search: ", total=search_amount):
         post_url = "https://www.reddit.com" + submission.permalink
         question_text = submission.title
         if submission.selftext:
@@ -50,6 +52,5 @@ def search_reddit(query):
                 "url": post_url
             }
             results_list.append(result_obj)
-            print(len(results_list))
 
     return results_list
