@@ -91,14 +91,13 @@ const App = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-purple-700 py-6 sm:py-12">
+    <div className="flex min-h-screen flex-col justify-center bg-[#D9D9D9] py-6 sm:py-12">
       <div className="relative py-3 sm:mx-auto sm:max-w-xl">
         {/* Background gradient for style */}
         <div className="absolute inset-0 -skew-y-6 transform bg-gradient-to-r from-cyan-400 to-blue-500 shadow-lg sm:-rotate-6 sm:skew-y-0 sm:rounded-3xl" />
         <div className="relative bg-white px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
           <div className="mx-auto max-w-md">
             <div className="text-center">
-              <img src={logo} className="mx-auto h-7 sm:h-8" alt="Logo" />
               <h1 className="mt-4 text-5xl font-bold text-[#0077B6]">
                 devchotomy
               </h1>
@@ -114,7 +113,7 @@ const App = () => {
                 type="submit"
                 className="mt-4 w-full rounded-md bg-blue-500 py-2 text-white hover:bg-blue-600"
               >
-                Search
+                search
               </button>
             </form>
             {loading && (
