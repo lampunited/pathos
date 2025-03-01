@@ -1,4 +1,4 @@
-import tkinter as tk
+# import tkinter as tk
 import requests
 
 def get_stackoverflow_answers(query):
@@ -38,16 +38,16 @@ def display_answers():
         output_text.insert(tk.END, "No answers found.\n")
 
 # Create the GUI
-root = tk.Tk()
-root.title('Stack Overflow Answer Finder')
+# root = tk.Tk()
+# root.title('Stack Overflow Answer Finder')
 
-entry = tk.Entry(root, width=50)
-entry.pack(pady=10)
+# entry = tk.Entry(root, width=50)
+# entry.pack(pady=10)
 
-search_button = tk.Button(root, text='Search', command=display_answers)
-search_button.pack(pady=5)
+# search_button = tk.Button(root, text='Search', command=display_answers)
+# search_button.pack(pady=5)
 
-output_text = tk.Text(root, height=10, width=70)
-output_text.pack(pady=10)
+# output_text = tk.Text(root, height=10, width=70)
+# output_text.pack(pady=10)
 
-root.mainloop()
+# root.mainloop()
