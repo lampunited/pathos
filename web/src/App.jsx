@@ -99,14 +99,14 @@ const App = () => {
           <div className="mx-auto max-w-md">
             <div className="text-center">
               <img src={logo} className="mx-auto h-7 sm:h-8" alt="Logo" />
-              <h1 className="mt-4 text-2xl font-bold text-gray-800">
-                Developer Tool Search
+              <h1 className="mt-4 text-5xl font-bold text-[#0077B6]">
+                devchotomy
               </h1>
             </div>
             <form onSubmit={handleSubmit} className="mt-6">
               <textarea
                 className="w-full rounded-md border border-gray-300 p-2 text-gray-800"
-                placeholder="Enter your debugging or programming question..."
+                placeholder="ask a tech question..."
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
               />
