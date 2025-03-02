@@ -42,7 +42,9 @@ for submission in search_results:
     # Append a single result object per submission
     for comment in combined_comments:
         answer_text = comment.body
+        author_name = comment.author.name if comment.author else "[deleted]"  # Handle deleted users
         result_obj = {
+            "username": author_name,
             "source": "reddit",
             "question_text": question_text,
             "answer_text": answer_text,

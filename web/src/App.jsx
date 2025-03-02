@@ -92,7 +92,7 @@ const App = () => {
 
   return (
     <div className="flex min-h-screen flex-col justify-center bg-[#D9D9D9] py-6 sm:py-12">
-      <div className="relative py-3 sm:mx-auto sm:max-w-xl">
+      <div className="relative py-3 sm:mx-auto sm:max-w-5xl">
         {/* Background gradient for style */}
         <div className="absolute inset-0 -skew-y-6 transform bg-gradient-to-r from-cyan-400 to-blue-500 shadow-lg sm:-rotate-6 sm:skew-y-0 sm:rounded-3xl" />
         <div className="relative bg-white px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
@@ -128,11 +128,11 @@ const App = () => {
                 <div>
                   {results.map((result, index) => (
                     <div key={index} className="mb-4 rounded-md bg-gray-100 p-4 text-sm text-gray-800">
-                      <p><strong>Question:</strong> {result.question_text}</p>
-                      <p><strong>Answer:</strong> {result.answer_text}</p>
-                      <p><strong>Distance:</strong> {result.distance}</p>
+                      <p><strong>question:</strong> {result.question_text}</p>
+                      <p><strong>answer:</strong> {result.answer_text}</p>
+                      <p><strong>distance:</strong> {result.distance}</p>
                       <p>
-                        <strong>URL:</strong>{' '}
+                        <strong>source:</strong>{' '}
                         <a href={result.url} target="_blank" rel="noopener noreferrer">
                           {result.url}
                         </a>
