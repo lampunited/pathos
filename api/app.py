@@ -6,7 +6,10 @@ from stackfunction import search_stack
 from redditfunction import search_reddit
 from createindex import create_index
 from search import search_faiss
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 app = Flask(__name__, static_folder='build', static_url_path='')
 CORS(app)  # Enable CORS if you are developing the front end separately
 

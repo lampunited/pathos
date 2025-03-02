@@ -1,8 +1,9 @@
 import requests
 from tqdm import tqdm
+import os
 
 def search_stack(query):
-    API_KEY = "rl_UUDhk4wTovnZBQsWCve1PCKtV"  # Replace with your actual Stack Exchange API key
+    API_KEY = os.getenv("STACK_KEY")  # Replace with your actual Stack Exchange API key
 
     # First request
     response = requests.get(

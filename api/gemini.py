@@ -1,7 +1,8 @@
 from google import genai
 from redditfunction import search_reddit
+import os
 
-client = genai.Client(api_key="AIzaSyCgOJpua5_yNc8JBuFI9f17Ysq03cUgkCU")
+client = genai.Client(api_key=os.getenv("GEMINI_KEY"))
 
 def ask_llm(question: str) -> str:
     # Append the instruction to the user's question.
