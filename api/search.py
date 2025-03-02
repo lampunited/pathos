@@ -5,11 +5,11 @@ from sentence_transformers import SentenceTransformer
 # Load SentenceTransformer model
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-# Load FAISS index and ID map
-index = faiss.read_index("api/index/faiss_index.bin")
-id_map = np.load("api/index/id_map.npy", allow_pickle=True).item()
-
 def search_faiss(query, top_k=3):
+    # Load FAISS index and ID map
+    index = faiss.read_index("api/index/faiss_index.bin")
+    id_map = np.load("api/index/id_map.npy", allow_pickle=True).item()
+
     """Search FAISS for similar results given a query."""
     query_embedding = model.encode([query]).astype('float32')
     
