@@ -121,41 +121,63 @@ function App() {
       </div>
 
       {/* RESULTS SECTION */}
-      <div className="container mx-auto px-6 md:px-12 pb-10">
+        <div className="container mx-auto px-6 md:px-12 pb-10">
         {results && results.length > 0 && (
           <div className="bg-white bg-opacity-90 rounded-lg shadow-xl p-6 text-gray-900">
             <h2 className="mb-4 text-xl font-semibold text-gray-900">
               Results
             </h2>
-            {results.map((result, index) => (
-              <div key={index} className="mb-4 p-4 border-b border-gray-300">
-                <p>
-                  <strong>Question:</strong> {result.question_text}
-                </p>
-                {/* Renders answer_text as HTML */}
-                <p>
-                  <strong>Answer:</strong>{' '}
-                  <span dangerouslySetInnerHTML={{ __html: result.answer_text }} />
-                </p>
-                {/* Distance line removed */}
-                <p>
-                  <strong>Source:</strong>{' '}
-                  <a
-                    href={result.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-indigo-600 hover:underline"
-                  >
-                    {result.url}
-                  </a>
-                </p>
-              </div>
-            ))}
+            {results.map((result, index) => {
+              const logoSrc = getLogoSrc(result.url);
+
+              return (
+                <div key={index} className="flex items-start mb-4 p-4 border-b border-gray-300">
+                  {/* Logo on the left */}
+                  <img
+                    src={logoSrc}
+                    alt="Logo"
+                    className="w-10 h-10 mr-4"
+                  />
+
+                  {/* Text on the right */}
+                  <div>
+                    {/* The answer text rendered as HTML (dangerouslySetInnerHTML) */}
+                    <div
+                      className="text-gray-900"
+                      dangerouslySetInnerHTML={{ __html: result.answer_text }}
+                    />
+
+                    {/* Question link at the bottom */}
+                    <p className="mt-2">
+                      <strong>From:</strong>{" "}
+                      <a
+                        href={result.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-indigo-600 hover:underline"
+                      >
+                        {result.question_text}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
     </div>
   );
+}
+
+// Helper function to pick the correct logo
+function getLogoSrc(url) {
+  if (url.includes("reddit.com")) {
+    return "/reddit-icon.png";      // Adjust the path to where your image is stored
+  } else if (url.includes("stackoverflow.com")) {
+    return "/stack-icon.png";
+  }
+  return "/default-logo.png";       // Fallback or a default image
 }
 
 export default App;
