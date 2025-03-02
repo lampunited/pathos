@@ -7,6 +7,7 @@ from stackfunction import search_stack
 import stack_overflow  # Ensure this file is named "stack_overflow.py"
 from createindex import create_index
 from search import search_faiss
+import time
 
 app = Flask(__name__, static_folder='build', static_url_path='')
 CORS(app)  # Enable CORS if you are developing the front end separately
@@ -18,11 +19,11 @@ def search():
     if not query:
         return jsonify({"error": "No query provided"}), 400
     try:
-        print(query)
+        #print(query)
         gemini_query = ask_llm(query)
-        print(gemini_query)
+        #print(gemini_query)
         reddit_data = search_stack(gemini_query)
-        print(reddit_data[0])
+
         create_index(reddit_data)
         results = search_faiss(query, top_k=10)
         return results

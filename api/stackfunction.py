@@ -39,7 +39,7 @@ def search_stack(query):
         answer_data = response.json()["items"]
 
         for i in range(min(3, answer_count)):
-            #print(answer_data[i]["body"])
+            ##print(answer_data[i]["body"])
             result_obj = {
                 "source": "stack",
                 "question_text": question_data[i]["title"],

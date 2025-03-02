@@ -4,10 +4,11 @@ from search import search_faiss
 from gemini import ask_llm
 from stackfunction import search_stack
 
-question = "How can I download Github?"
+question = "Github install not working"
 query = ask_llm(question)
 print("Query: " + query)
 data = search_stack(query)
+print(data)
 print("Data length: " + str(len(data)))
 create_index(data)
 results = search_faiss(query, top_k=10)
