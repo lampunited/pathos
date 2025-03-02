@@ -16,6 +16,8 @@ def search_stack(query):
         }
     )
 
+    print(response.json())
+
     question_data = response.json()["items"]
     results_list = []
 
@@ -57,4 +59,5 @@ def truncate_to_words(text, word_limit=250):
         return " ".join(words[:word_limit]) + "..."  # Add ellipsis if truncated
     return text  # Return full text if within limit
 
+search_stack("hello")
 
