@@ -15,6 +15,7 @@ def create_index(data):
 
     for idx, item in tqdm(enumerate(data), desc="Creating FAISS index: ", total=len(data)):
         text_to_embed = f"{item['answer_text']}"
+        #text_to_embed = f"{item['question_text']}"
         embedding = model.encode(text_to_embed)
         
         embeddings.append(embedding)

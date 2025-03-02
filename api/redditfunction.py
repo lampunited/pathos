@@ -14,7 +14,7 @@ def search_reddit(query):
 
     print(f"Authenticated as: {reddit.user.me()}")
 
-    search_amount = 10
+    search_amount = 20
     search_results = reddit.subreddit("all").search(query, sort="relevance", limit=search_amount)
 
     results_list = []
@@ -22,22 +22,23 @@ def search_reddit(query):
     for submission in tqdm(search_results, desc="Processing reddit search: ", total=search_amount):
         post_url = "https://www.reddit.com" + submission.permalink
         question_text = submission.title
-        if submission.selftext:
-            question_text += "\n\n" + submission.selftext
+        print(question_text)
+        #if submission.selftext:
+            #question_text += "\n\n" + submission.selftext
 
         submission.comments.replace_more(limit=0)
         all_comments = submission.comments.list()
         
         depth0_comments = [c for c in all_comments if c.depth == 0]
-        depth1_comments = [c for c in all_comments if c.depth == 1]
-        other_comments  = [c for c in all_comments if c.depth > 1]
+        #depth1_comments = [c for c in all_comments if c.depth == 1]
+        #other_comments  = [c for c in all_comments if c.depth > 1]
         
         sort_key = lambda c: (c.score, len(c.body))
         depth0_sorted = sorted(depth0_comments, key=sort_key, reverse=True)[:5]
-        depth1_sorted = sorted(depth1_comments, key=sort_key, reverse=True)[:5]
-        other_sorted  = sorted(other_comments, key=sort_key, reverse=True)[:5]
+        #depth1_sorted = sorted(depth1_comments, key=sort_key, reverse=True)[:5]
+        #other_sorted  = sorted(other_comments, key=sort_key, reverse=True)[:5]
         
-        combined_comments = depth0_sorted + depth1_sorted + other_sorted
+        combined_comments = depth0_sorted #+ depth1_sorted + other_sorted
         
         post_score = submission.score
         

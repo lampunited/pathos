@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from gemini import ask_llm
 from redditfunction import search_reddit
+from stackfunction import search_stack
 import stack_overflow  # Ensure this file is named "stack_overflow.py"
 from createindex import create_index
 from search import search_faiss
@@ -20,7 +21,7 @@ def search():
         print(query)
         gemini_query = ask_llm(query)
         print(gemini_query)
-        reddit_data = search_reddit(gemini_query)
+        reddit_data = search_stack(gemini_query)
         print(reddit_data[0])
         create_index(reddit_data)
         results = search_faiss(query, top_k=10)
