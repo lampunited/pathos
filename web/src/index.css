@@ -1,0 +1,6 @@
+/* index.css */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+
+.gradient {
+  background: linear-gradient(0deg, #1f1f2e 0%, #1f1f2e 35%, #4e4376 100%);
+}
