@@ -16,15 +16,12 @@ def search_stack(query):
         }
     )
 
-    print(response.json())
-
     question_data = response.json()["items"]
     results_list = []
 
     for i in tqdm(range(min(10, len(question_data)))):
         question_id = question_data[i]["question_id"]
         answer_count = question_data[i]["answer_count"]
-        #print(question_id)
 
         # Second request (formatted like the first one)
         response = requests.get(
@@ -41,7 +38,6 @@ def search_stack(query):
         answer_data = response.json()["items"]
 
         for i in range(min(3, answer_count)):
-            ##print(answer_data[i]["body"])
             result_obj = {
                 "source": "stack",
                 "question_text": question_data[i]["title"],
@@ -59,5 +55,5 @@ def truncate_to_words(text, word_limit=250):
         return " ".join(words[:word_limit]) + "..."  # Add ellipsis if truncated
     return text  # Return full text if within limit
 
-search_stack("hello")
+
 

@@ -21,7 +21,6 @@ def create_index(data):
         
         embeddings.append(embedding)
         id_map[idx] = item  # Store mapping of FAISS index to original data
-        # print(id_map[idx])
 
     embeddings = np.array(embeddings).astype('float32')  # Convert to FAISS-compatible format
 
