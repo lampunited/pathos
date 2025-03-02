@@ -24,12 +24,12 @@ def ask_llm(question: str) -> str:
 
 def ask_question(question: str, data: str) -> str:
     # Append the instruction to the user's question.
-    prompt = f"{question}\nCan you summarize this text in a few sentences using the data below in a legible answer: \n {data}"
+    prompt = f"{question}\nCan you summarize this text in a few sentences in a legible answer: \n {data}"
     response = client.models.generate_content(
         model="gemini-2.0-flash",  # Replace with the correct model identifier if needed.
         contents=prompt
     )
-    return response.text
+    return "pathOS AI Summary: " + response.text
 
 if __name__ == "__main__":
     user_question = input("Enter your debugging or programming question: ")

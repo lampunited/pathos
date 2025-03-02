@@ -43,12 +43,18 @@ def search_stack(query):
             result_obj = {
                 "source": "stack",
                 "question_text": question_data[i]["title"],
-                "answer_text": answer_data[i]["body"],
+                "answer_text": truncate_to_words(answer_data[i]["body"]),
                 "score": answer_data[i]["score"],
                 "url": "https://stackoverflow.com/a/" + str(answer_data[i]["answer_id"])
             }
             results_list.append(result_obj)
 
     return results_list
+
+def truncate_to_words(text, word_limit=250):
+    words = text.split()  # Split text into words
+    if len(words) > word_limit:
+        return " ".join(words[:word_limit]) + "..."  # Add ellipsis if truncated
+    return text  # Return full text if within limit
 
 

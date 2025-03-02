@@ -51,10 +51,16 @@ def search_reddit(query):
                 "username": author_name,  # Add username here
                 "source": "reddit",
                 "question_text": question_text,
-                "answer_text": answer_text,
+                "answer_text": truncate_to_words(answer_text),
                 "score": post_score,
                 "url": comment_url
             }
             results_list.append(result_obj)
 
     return results_list
+
+def truncate_to_words(text, word_limit=250):
+    words = text.split()  # Split text into words
+    if len(words) > word_limit:
+        return " ".join(words[:word_limit]) + "..."  # Add ellipsis if truncated
+    return text  # Return full text if within limit
