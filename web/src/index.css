@@ -1,6 +1,34 @@
 /* index.css */
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
 
-.gradient {
-  background: linear-gradient(0deg, #1f1f2e 0%, #1f1f2e 35%, #4e4376 100%);
+
+/* Reset body margin/padding if desired */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(-45deg, #485c4c, #032227);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
 }
+
+/* Animated gradient background */
+.gradient {
+  /* A 4-color purple-themed gradient */
+  background: linear-gradient(-45deg, #485c4c, #032227);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+}
+
+/* Keyframes to shift the gradient positions */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
