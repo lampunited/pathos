@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import './index.css';
 
 function App() {
@@ -114,6 +115,7 @@ function App() {
                     px-2
                     rounded
                     border-2
+                    border-indigo-700
                     bg-transparent
                     hover:bg-transparent
                     transition-colors
@@ -125,6 +127,17 @@ function App() {
                 </button>
               </div>
             </form>
+            {loading && (
+              <div className="mt-4">
+                <DotLottieReact
+                  src="https://lottie.host/679a2c79-bd32-481e-b149-ea8ddb004b0b/M9x5L7Qgwf.lottie"
+                  loop
+                  autoplay
+                  className="mx-auto w-48 h-48"
+                />
+
+              </div>
+            )}
             {error && (
               <p className="mt-4 text-center text-red-500">
                 Error: {error}
@@ -152,23 +165,10 @@ function App() {
                     alt="Logo"
                     className="w-10 h-10 mr-4"
                   />
-                  <div>
-                    <div
-                      className="text-gray-900"
-                      dangerouslySetInnerHTML={{ __html: result.answer_text }}
-                    />
-                    <p className="mt-2">
-                      <strong>From:</strong>{" "}
-                      <a
-                        href={result.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-indigo-600 hover:underline"
-                      >
-                        {result.question_text}
-                      </a>
-                    </p>
-                  </div>
+                  <div
+                    className="text-gray-900 whitespace-pre-wrap break-words"
+                    dangerouslySetInnerHTML={{ __html: result.answer_text }}
+                  />
                 </div>
               );
             })}
