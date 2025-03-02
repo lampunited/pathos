@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from gemini import ask_llm
 from stackfunction import search_stack
+from redditfunction import search_reddit
 from createindex import create_index
 from search import search_faiss
 
