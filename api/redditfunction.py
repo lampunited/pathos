@@ -44,8 +44,10 @@ def search_reddit(query):
         
         # Append a single result object per submission
         for comment in combined_comments:
+            author_name = comment.author.name if comment.author else "[deleted]"  # Handle deleted users
             answer_text = comment.body
             result_obj = {
+                "username": author_name,  # Add username here
                 "source": "reddit",
                 "question_text": question_text,
                 "answer_text": answer_text,

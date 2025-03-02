@@ -77,7 +77,7 @@ const App = () => {
       const response = await fetch('http://127.0.0.1:5000/api/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: searchInput })
+        body: JSON.stringify({ query: searchInput }),
       });
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
@@ -92,11 +92,11 @@ const App = () => {
 
   return (
     <div className="flex min-h-screen flex-col justify-center bg-[#D9D9D9] py-6 sm:py-12">
-      <div className="relative py-3 sm:mx-auto sm:max-w-xl">
+      <div className="relative py-3 sm:mx-auto sm:max-w-10xl">
         {/* Background gradient for style */}
         <div className="absolute inset-0 -skew-y-6 transform bg-gradient-to-r from-cyan-400 to-blue-500 shadow-lg sm:-rotate-6 sm:skew-y-0 sm:rounded-3xl" />
         <div className="relative bg-white px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
-          <div className="mx-auto max-w-md">
+          <div className="mx-auto max-w-3xl">
             <div className="text-center">
               <h1 className="mt-4 text-5xl font-bold text-[#0077B6]">
                 devchotomy
@@ -122,12 +122,24 @@ const App = () => {
             {error && (
               <p className="mt-4 text-center text-red-500">Error: {error}</p>
             )}
-            {results && (
+            {results && Array.isArray(results) && (
               <div className="mt-6">
                 <h2 className="mb-2 text-lg font-semibold text-gray-700">Results:</h2>
-                <pre className="whitespace-pre-wrap rounded-md bg-gray-100 p-4 text-sm text-gray-800">
-                  {JSON.stringify(results, null, 2)}
-                </pre>
+                <div>
+                  {results.map((result, index) => (
+                    <div key={index} className="mb-4 rounded-md bg-gray-100 p-4 text-sm text-gray-800">
+                      <p><strong>question:</strong> {result.question_text}</p>
+                      <p><strong>answer:</strong> {result.answer_text}</p>
+                      <p><strong>distance:</strong> {result.distance}</p>
+                      <p>
+                        <strong>source:</strong>{' '}
+                        <a href={result.url} target="_blank" rel="noopener noreferrer">
+                          {result.url}
+                        </a>
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
             <Footer />
