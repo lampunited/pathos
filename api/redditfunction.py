@@ -5,11 +5,11 @@ from tqdm import tqdm
 def search_reddit(query):
     #authentication
     reddit = praw.Reddit(
-        client_id="8sZIJdk__UZwu_fJmx9Rew",
-        client_secret="scG0wV9ZXr7SWBjMP44Lkj4PWaY0iw",
+        client_id="8z4qU_TeJAv6fmxPjen2bQ",
+        client_secret="GI4-dZysdlSqQJuRWwObql7H0brpMQ",
         user_agent="hackillinois_reddit_bot",
-        username = "Gullible_Drummer_471",
-        password = "Gunnersbo6a#"
+        username = "Active-Relative-2764",
+        password = "hackillinois"
     )
 
     print(f"Authenticated as: {reddit.user.me()}")
