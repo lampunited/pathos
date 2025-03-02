@@ -117,14 +117,14 @@ const App = () => {
               </button>
             </form>
             {loading && (
-              <p className="mt-4 text-center text-gray-600">Loading...</p>
+              <p className="mt-4 text-center text-gray-600">loading...</p>
             )}
             {error && (
-              <p className="mt-4 text-center text-red-500">Error: {error}</p>
+              <p className="mt-4 text-center text-red-500">error: {error}</p>
             )}
             {results && Array.isArray(results) && (
               <div className="mt-6">
-                <h2 className="mb-2 text-lg font-semibold text-gray-700">Results:</h2>
+                <h2 className="mb-2 text-lg font-semibold text-gray-700">synposis:</h2>
                 <div>
                   {results.map((result, index) => (
                     <div key={index} className="mb-4 rounded-md bg-gray-100 p-4 text-sm text-gray-800">

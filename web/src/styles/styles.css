@@ -6,21 +6,21 @@
     @apply text-xl;
   }
   a {
-    @apply text-blue-500 underline underline-offset-2;
+    @apply text-red-500 underline underline-offset-2;
   }
 }
 
 @layer components {
   .btn {
-    @apply rounded bg-blue-500 px-4 py-2 text-white;
+    @apply rounded bg-red-500 px-4 py-2 text-white;
   }
 
   .btn-indigo {
-    @apply bg-indigo-500 text-white;
+    @apply bg-green-500 text-white;
   }
 
   .btn-indigo:hover {
-    @apply bg-indigo-600;
+    @apply bg-green-600;
   }
 
   .btn-blue {
