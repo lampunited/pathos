@@ -164,10 +164,23 @@ function App() {
                     alt="Logo"
                     className="w-10 h-10 mr-4"
                   />
-                  <div
-                    className="text-gray-900 whitespace-pre-wrap break-words"
-                    dangerouslySetInnerHTML={{ __html: result.answer_text }}
-                  />
+                    <div className="flex flex-col">
+                    <div
+                      className="text-gray-900 whitespace-pre-wrap break-words"
+                      dangerouslySetInnerHTML={{ __html: result.answer_text }}
+                    />
+                    <p className="mt-2">
+                      <strong>From:</strong>{" "}
+                      <a
+                        href={result.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-indigo-600 hover:underline"
+                      >
+                        {result.question_text}
+                      </a>
+                    </p>
+                  </div>
                 </div>
               );
             })}
