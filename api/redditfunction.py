@@ -14,7 +14,7 @@ def search_reddit(query):
 
     print(f"Authenticated as: {reddit.user.me()}")
 
-    search_amount = 20
+    search_amount = 10
     search_results = reddit.subreddit("all").search(query, sort="relevance", limit=search_amount)
 
     results_list = []
@@ -22,7 +22,7 @@ def search_reddit(query):
     for submission in tqdm(search_results, desc="Processing reddit search: ", total=search_amount):
         post_url = "https://www.reddit.com" + submission.permalink
         question_text = submission.title
-        print(question_text)
+        #print(question_text)
         #if submission.selftext:
             #question_text += "\n\n" + submission.selftext
 
@@ -34,7 +34,7 @@ def search_reddit(query):
         #other_comments  = [c for c in all_comments if c.depth > 1]
         
         sort_key = lambda c: (c.score, len(c.body))
-        depth0_sorted = sorted(depth0_comments, key=sort_key, reverse=True)[:5]
+        depth0_sorted = sorted(depth0_comments, key=sort_key, reverse=True)[:3]
         #depth1_sorted = sorted(depth1_comments, key=sort_key, reverse=True)[:5]
         #other_sorted  = sorted(other_comments, key=sort_key, reverse=True)[:5]
         
@@ -46,13 +46,14 @@ def search_reddit(query):
         for comment in combined_comments:
             author_name = comment.author.name if comment.author else "[deleted]"  # Handle deleted users
             answer_text = comment.body
+            comment_url = f"https://www.reddit.com{comment.permalink}"
             result_obj = {
                 "username": author_name,  # Add username here
                 "source": "reddit",
                 "question_text": question_text,
                 "answer_text": answer_text,
                 "score": post_score,
-                "url": post_url
+                "url": comment_url
             }
             results_list.append(result_obj)
 

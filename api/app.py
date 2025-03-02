@@ -22,9 +22,11 @@ def search():
         #print(query)
         gemini_query = ask_llm(query)
         #print(gemini_query)
-        reddit_data = search_stack(gemini_query)
+        reddit_data = search_reddit(gemini_query)
+        stack_data = search_stack(gemini_query)
 
-        create_index(reddit_data)
+        data = reddit_data + stack_data
+        create_index(data)
         results = search_faiss(query, top_k=10)
         return results
     except Exception as e:

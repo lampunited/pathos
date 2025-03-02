@@ -19,7 +19,7 @@ def search_stack(query):
     question_data = response.json()["items"]
     results_list = []
 
-    for i in tqdm(range(min(20, len(question_data)))):
+    for i in tqdm(range(min(10, len(question_data)))):
         question_id = question_data[i]["question_id"]
         answer_count = question_data[i]["answer_count"]
         #print(question_id)
@@ -45,7 +45,7 @@ def search_stack(query):
                 "question_text": question_data[i]["title"],
                 "answer_text": answer_data[i]["body"],
                 "score": answer_data[i]["score"],
-                "url": question_data[i]["link"]
+                "url": "https://stackoverflow.com/a/" + str(answer_data[i]["answer_id"])
             }
             results_list.append(result_obj)
 

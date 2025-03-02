@@ -7,7 +7,7 @@ from stackfunction import search_stack
 question = "Github install not working"
 query = ask_llm(question)
 print("Query: " + query)
-data = search_stack(query)
+data = search_reddit(query)
 print(data)
 print("Data length: " + str(len(data)))
 create_index(data)
