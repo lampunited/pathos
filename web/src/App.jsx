@@ -51,20 +51,10 @@ function App() {
         fontFamily: "'Source Sans Pro', sans-serif",
       }}
     >
-      {/* NAVBAR */}
+      {/* NAVBAR (Rainblur logo/name removed) */}
       <nav className="w-full py-5 absolute">
-        <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Brand / Logo */}
-          <div className="text-lg font-bold text-gray-100">
-            <a href="#" className="flex items-center no-underline hover:no-underline">
-              {/* Example logo icon */}
-              <svg className="h-8 fill-current inline mr-2" viewBox="0 0 512 512">
-                <path d="M256,8C119,8,8,119,8,256s111,248,248,248s248-111,248-248S393,8,256,8z" />
-              </svg>
-              Rainblur
-            </a>
-          </div>
-          {/* Social Links (optional) */}
+        <div className="container mx-auto px-6 md:px-12 flex items-center justify-end">
+          {/* Optional Social Links (remove if not needed) */}
           <div className="flex items-center space-x-4">
             <a
               href="#"
@@ -93,10 +83,10 @@ function App() {
         <div className="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
           <div className="w-full flex flex-col items-center text-center relative z-10">
             <h1 className="font-bold text-5xl text-white leading-tight mt-4">
-              Chatbot
+              pathOS
             </h1>
             <p className="text-2xl text-gray-200 leading-snug pt-2">
-              Ask a Tech Question
+              tech questions with human responses
             </p>
 
             {/* Chatbot Form */}
@@ -132,7 +122,6 @@ function App() {
 
       {/* RESULTS SECTION */}
       <div className="container mx-auto px-6 md:px-12 pb-10">
-        {/* Render results if present */}
         {results && results.length > 0 && (
           <div className="bg-white bg-opacity-90 rounded-lg shadow-xl p-6 text-gray-900">
             <h2 className="mb-4 text-xl font-semibold text-gray-900">
@@ -143,12 +132,10 @@ function App() {
                 <p>
                   <strong>Question:</strong> {result.question_text}
                 </p>
-                {/* Renders answer_text as HTML (dangerouslySetInnerHTML) */}
+                {/* Renders answer_text as HTML */}
                 <p>
                   <strong>Answer:</strong>{' '}
-                  <span
-                    dangerouslySetInnerHTML={{ __html: result.answer_text }}
-                  />
+                  <span dangerouslySetInnerHTML={{ __html: result.answer_text }} />
                 </p>
                 {/* Distance line removed */}
                 <p>
@@ -166,35 +153,7 @@ function App() {
             ))}
           </div>
         )}
-
-        {/* No results found */}
-        {results && !loading && results.length === 0 && (
-          <p className="mt-4 text-center text-gray-200">
-            No results found.
-          </p>
-        )}
       </div>
-
-      {/* FOOTER */}
-      <footer className="w-full py-6 text-center text-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-sm">
-        <p>Download our app:</p>
-        <div className="flex justify-center space-x-4 mt-2">
-          <a href="#" title="Google Play">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-              alt="Google Play"
-              className="h-10"
-            />
-          </a>
-          <a href="#" title="App Store">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-download-badge.svg"
-              alt="App Store"
-              className="h-10"
-            />
-          </a>
-        </div>
-      </footer>
     </div>
   );
 }
