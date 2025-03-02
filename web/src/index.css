@@ -1,20 +1,35 @@
 /* index.css */
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
 
+/* index.css */
 
-/* Reset body margin/padding if desired */
+pre,
+code,
+pre code {
+  white-space: pre-wrap !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+pre[style*="white-space: pre"] {
+  white-space: pre-wrap !important;
+}
+code[style*="white-space: pre"] {
+  white-space: pre-wrap !important;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(-45deg, #485c4c, #032227);
+  background: linear-gradient(-45deg, #5a4350, #023016);
   background-size: 400% 400%;
   animation: gradientAnimation 15s ease infinite;
 }
 
-/* Animated gradient background */
+
 .gradient {
-  /* A 4-color purple-themed gradient */
-  background: linear-gradient(-45deg, #485c4c, #032227);
+  background: linear-gradient(-45deg, #5a4350, #023016);
   background-size: 400% 400%;
   animation: gradientAnimation 15s ease infinite;
 }

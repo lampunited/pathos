@@ -114,7 +114,6 @@ function App() {
                     px-2
                     rounded
                     border-2
-                    border-indigo-700
                     bg-transparent
                     hover:bg-transparent
                     transition-colors
